@@ -33,6 +33,7 @@ namespace IISExpressBootstrap
 
             var bindingNode = siteNode.Descendants("binding").FirstOrDefault();
             var bindingInfo = bindingNode.Attribute("bindingInformation").Value;
+            var protocol = bindingNode.Attribute("protocol").Value;
             var match = Regex.Match(bindingInfo, "\\*\\:(\\d*)\\:(.*)");
             var port = match.Groups[1].ToString();
             var host = match.Groups[2].ToString();
@@ -51,7 +52,7 @@ namespace IISExpressBootstrap
             var iisExpressProcess = Process.Start(startInfo);
 
             //Launch chrome
-            Process.Start("chrome.exe", $"http://{host}:{port}");
+            Process.Start("chrome.exe", $"{protocol}://{host}:{port}");
 
             iisExpressProcess.WaitForExit();
 
