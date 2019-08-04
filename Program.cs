@@ -37,7 +37,9 @@ namespace IISExpressBootstrap
             var match = Regex.Match(bindingInfo, "\\*\\:(\\d*)\\:(.*)");
             var port = match.Groups[1].ToString();
             var host = match.Groups[2].ToString();
-                
+
+            var hosts = new Hosts();
+            hosts.AddLocalHostName(host);
 
             xml.Save(applicationHostFilename);
 
